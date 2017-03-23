@@ -1,4 +1,4 @@
-module.export = function (adapter, encoderDecoder, protocol) {
+module.exports = function (adapter, encoderDecoder, protocol) {
     return {
         encode: function (payloadType, payload, clientMsgId) {
             return encoderDecoder.encode(
@@ -6,6 +6,7 @@ module.export = function (adapter, encoderDecoder, protocol) {
             );
         },
         decode: function (callback) {
+          console.log(333)
             encoderDecoder.registerDecodeHandler(function (message) {
                 var
                     payloadType,
@@ -24,5 +25,5 @@ module.export = function (adapter, encoderDecoder, protocol) {
                 encoderDecoder.decode(data);
             });
         }
-    }
+    };
 };
