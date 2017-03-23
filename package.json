@@ -1,0 +1,8 @@
+{
+  "name": "connect-js-codec",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/spirinvladimir/connect-js-codec.git"
+  }
+}
