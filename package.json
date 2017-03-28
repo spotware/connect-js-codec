@@ -1,8 +1,19 @@
 {
   "name": "connect-js-codec",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "repository": {
     "type": "git",
     "url": "git://github.com/spirinvladimir/connect-js-codec.git"
+  },
+  "scripts": {
+    "test": "ava",
+    "watch": "ava -w",
+    "start": "npm run watch"
+  },
+  "devDependencies": {
+    "ava": "0.18.2",
+    "connect-js-adapter-tls": "spotware/connect-js-adapter-tls#v3.0.3",
+    "connect-protobuf-messages": "spotware/connect-protobuf-messages#v2.0.0",
+    "connect-js-encode-decode": "spotware/connect-js-encode-decode"
   }
 }

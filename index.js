@@ -6,7 +6,6 @@ module.exports = function (adapter, encoderDecoder, protocol) {
             );
         },
         decode: function (callback) {
-          console.log(333)
             encoderDecoder.registerDecodeHandler(function (message) {
                 var
                     payloadType,
