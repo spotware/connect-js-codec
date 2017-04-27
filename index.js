@@ -1,28 +1,20 @@
-module.exports = function (adapter, encoderDecoder, protocol) {
+"use strict";
+exports.__esModule = true;
+function codec(adapter, encoderDecoder, protocol) {
     return {
         encode: function (payloadType, payload, clientMsgId) {
-            return encoderDecoder.encode(
-                protocol.encode(payloadType, payload, clientMsgId)
-            );
+            return encoderDecoder.encode(protocol.encode(payloadType, payload, clientMsgId));
         },
         decode: function (callback) {
-            encoderDecoder.registerDecodeHandler(function (message) {
-                var
-                    payloadType,
-                    payload,
-                    clientMsgId;
-
-                message = protocol.decode(message);
-
-                payloadType = message.payloadType;
-                payload = message.payload;
-                clientMsgId = message.clientMsgId;
-
-                callback(payloadType, payload, clientMsgId);
+            encoderDecoder.registerDecodeHandler(function (data) {
+                var message = protocol.decode(data);
+                callback(message.payloadType, message.payload, message.clientMsgId);
             });
             adapter.onData(function (data) {
                 encoderDecoder.decode(data);
             });
         }
     };
-};
+}
+exports.codec = codec;
+;
