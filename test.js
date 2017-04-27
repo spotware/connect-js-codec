@@ -14,7 +14,7 @@ var
         port: 5032
     }),
     encodeDecode = new EncodeDecode(),
-    createCodec = require('./index'),
+    createCodec = require('./index').codec,
     codec = createCodec(adapter, encodeDecode, protocol),
     sendCommand = function (payloadType, payload, clientMsgId) {
         adapter.send(
