@@ -15,12 +15,7 @@ var
     }),
     encodeDecode = new EncodeDecode(),
     createCodec = require('./index').codec,
-    codec = createCodec(adapter, encodeDecode, protocol),
-    sendCommand = function (payloadType, payload, clientMsgId) {
-        adapter.send(
-            codec.encode(payloadType, payload, clientMsgId)
-        );
-    };
+    codec = createCodec(encodeDecode, protocol);
 
 test.cb('encode and send ping message then recive and decode respond', t => {
     const
@@ -32,9 +27,14 @@ test.cb('encode and send ping message then recive and decode respond', t => {
     protocol.build();
 
     adapter.onOpen(function () {
-        sendCommand(payloadType, payload, clientMsgId);
+        adapter.send(
+            codec.encode(payloadType, payload, clientMsgId)
+        );
     });
-    codec.decode(function (payloadType, respond, id) {
+    adapter.onData(function (data) {
+        codec.decode(data);
+    });
+    codec.subscribe(function (payloadType, respond, id) {
         t.is(53, payloadType);
         t.not(respond.timestamp, undefined);
         t.is(clientMsgId, id);

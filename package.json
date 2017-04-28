@@ -6,8 +6,9 @@
     "url": "git://github.com/spirinvladimir/connect-js-codec.git"
   },
   "scripts": {
-    "test": "nyc ava",
-    "watch": "ava -w",
+    "build": "tsc index.ts",
+    "test": "npm run build && nyc ava",
+    "watch": "npm run build && ava -w",
     "start": "npm run watch"
   },
   "devDependencies": {
@@ -15,6 +16,10 @@
     "connect-js-adapter-tls": "spotware/connect-js-adapter-tls#v3.0.3",
     "connect-js-encode-decode": "spotware/connect-js-encode-decode",
     "connect-protobuf-messages": "spotware/connect-protobuf-messages#v2.0.0",
-    "nyc": "10.2.0"
+    "nyc": "10.2.0",
+    "typescript": "2.3.1"
+  },
+  "dependencies": {
+    "@types/node": "7.0.14"
   }
 }
