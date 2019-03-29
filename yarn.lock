@@ -969,22 +969,15 @@ connect-js-adapter-tls@jeremyjs/connect-js-adapter-tls#v4.0.0:
   dependencies:
     state-emitter spotware/state-emitter#v2.0.2
 
-connect-js-encode-decode@jeremyjs/connect-js-encode-decode#jeremyjs.update-openapi-version-in-tests:
-  version "1.0.0"
-  resolved "https://codeload.github.com/jeremyjs/connect-js-encode-decode/tar.gz/46ce38fc6172e71f153b968851ffaa32ca12a41f"
+connect-js-encode-decode@jeremyjs/connect-js-encode-decode#v1.0.1:
+  version "1.0.1"
+  resolved "https://codeload.github.com/jeremyjs/connect-js-encode-decode/tar.gz/17e3536184182b619e9a57a1a9253bbbb98031f6"
   dependencies:
     buffer "4.5.1"
 
-"connect-protobuf-messages@git+https://github.com/jeremyjs/Open-API-2.0-protobuf-messages.git#fix-2.0.1":
+connect-protobuf-messages@jeremyjs/Open-API-2.0-protobuf-messages#v6.0.0:
   version "0.0.0"
-  resolved "git+https://github.com/jeremyjs/Open-API-2.0-protobuf-messages.git#ab7748131b653d733be12619304051758b99ca39"
-
-connect-protobuf-messages@jeremyjs/connect-protobuf-messages#jeremyjs.update-input-format:
-  version "3.0.0"
-  resolved "https://codeload.github.com/jeremyjs/connect-protobuf-messages/tar.gz/575d43d2131c010c4bd29354ce15dbbf32242d70"
-  dependencies:
-    connect-protobuf-messages "git+https://github.com/jeremyjs/Open-API-2.0-protobuf-messages.git#fix-2.0.1"
-    protobufjs "4.1.3"
+  resolved "https://codeload.github.com/jeremyjs/Open-API-2.0-protobuf-messages/tar.gz/2f5bbbe50ef81222af4cfdec55adb1ce6828eb3e"
 
 console-control-strings@^1.0.0, console-control-strings@~1.1.0:
   version "1.1.0"
@@ -2661,6 +2654,13 @@ onetime@^2.0.0:
   integrity sha1-BnQoIw/WdEOyeUsiu6UotoZ5YtQ=
   dependencies:
     mimic-fn "^1.0.0"
+
+open-api-protocol@jeremyjs/open-api-protocol#v3.0.0:
+  version "3.0.0"
+  resolved "https://codeload.github.com/jeremyjs/open-api-protocol/tar.gz/600be0762e8abac9c9bb23a00bf91e2b29d965da"
+  dependencies:
+    connect-protobuf-messages jeremyjs/Open-API-2.0-protobuf-messages#v6.0.0
+    protobufjs "4.1.3"
 
 optimist@^0.6.1:
   version "0.6.1"

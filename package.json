@@ -16,8 +16,8 @@
     "@types/node": "11.12.0",
     "ava": "0.18.2",
     "connect-js-adapter-tls": "jeremyjs/connect-js-adapter-tls#v4.0.0",
-    "connect-js-encode-decode": "jeremyjs/connect-js-encode-decode#jeremyjs.update-openapi-version-in-tests",
-    "connect-protobuf-messages": "jeremyjs/connect-protobuf-messages#jeremyjs.update-input-format",
+    "connect-js-encode-decode": "jeremyjs/connect-js-encode-decode#v1.0.1",
+    "open-api-protocol": "jeremyjs/open-api-protocol#v3.0.0",
     "nyc": "10.2.0",
     "typescript": "3.3.4000"
   }
