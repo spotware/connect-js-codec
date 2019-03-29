@@ -1,5 +1,5 @@
 const test = require('ava')
-const ProtoMessages = require('connect-protobuf-messages')
+const OpenApiProtocol = require('open-api-protocol')
 const EncodeDecode = require('connect-js-encode-decode')
 const createAdapter = require('connect-js-adapter-tls')
 
@@ -11,19 +11,15 @@ const connection_config = {
 }
 
 test.cb('encode and send heartbeat message then receive and decode response', t => {  
-  const protocol = new ProtoMessages([
-    { file: 'CommonMessages.proto' },
-    { file: 'OpenApiMessages.proto' },
-  ])
+  const protocol = new OpenApiProtocol()
+  protocol.load()
+  protocol.build()
   
   const encodeDecode = new EncodeDecode()
   
   const codec = new Codec(encodeDecode, protocol)
 
   const adapter = createAdapter(codec)
-  
-  protocol.load()
-  protocol.build()
   
   const payloadType = protocol.getPayloadTypeByName('ProtoOAVersionReq')
   const payload = {}
@@ -45,19 +41,15 @@ test.cb('encode and send heartbeat message then receive and decode response', t 
 })
 
 test.cb('w/ factory function, encode and send heartbeat message then receive and decode response', t => {
-  const protocol = new ProtoMessages([
-    { file: 'CommonMessages.proto' },
-    { file: 'OpenApiMessages.proto' },
-  ])
+  const protocol = new OpenApiProtocol()
+  protocol.load()
+  protocol.build()
   
   const encodeDecode = new EncodeDecode()
   
   const codec = createCodec(encodeDecode, protocol)
   
   const adapter = createAdapter(codec)
-  
-  protocol.load()
-  protocol.build()
   
   const payloadType = protocol.getPayloadTypeByName('ProtoOAVersionReq')
   const payload = {}
