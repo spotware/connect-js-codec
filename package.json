@@ -1,25 +1,24 @@
 {
   "name": "connect-js-codec",
-  "version": "1.0.4",
+  "version": "1.1.1",
   "repository": {
     "type": "git",
-    "url": "git://github.com/spirinvladimir/connect-js-codec.git"
+    "url": "git://github.com/jeremyjs/connect-js-codec.git"
   },
   "scripts": {
-    "build": "tsc index.ts",
+    "build": "tsc",
     "test": "npm run build && nyc ava",
     "watch": "npm run build && ava -w",
     "start": "npm run watch"
   },
+  "dependencies": {},
   "devDependencies": {
+    "@types/node": "11.12.0",
     "ava": "0.18.2",
-    "connect-js-adapter-tls": "spotware/connect-js-adapter-tls#v3.0.3",
-    "connect-js-encode-decode": "spotware/connect-js-encode-decode",
-    "connect-protobuf-messages": "spotware/connect-protobuf-messages#v2.0.0",
+    "connect-js-adapter-tls": "jeremyjs/connect-js-adapter-tls#v4.0.0",
+    "connect-js-encode-decode": "jeremyjs/connect-js-encode-decode#v1.0.1",
+    "open-api-protocol": "jeremyjs/open-api-protocol#v3.0.0",
     "nyc": "10.2.0",
-    "typescript": "2.3.1"
-  },
-  "dependencies": {
-    "@types/node": "7.0.14"
+    "typescript": "3.3.4000"
   }
 }

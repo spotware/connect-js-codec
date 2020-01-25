@@ -1,44 +1,71 @@
-var
-    test = require('ava'),
-    ProtoMessages = require('connect-protobuf-messages'),
-    EncodeDecode = require('connect-js-encode-decode'),
-    AdapterTLS = require('connect-js-adapter-tls'),
-    protocol = new ProtoMessages([
-        {
-            file: 'node_modules/connect-protobuf-messages/src/main/protobuf/CommonMessages.proto',
-            protoPayloadType: 'ProtoPayloadType'
-        }
-    ]),
-    adapter = new AdapterTLS({
-        host: 'sandbox-tradeapi.spotware.com',
-        port: 5032
-    }),
-    encodeDecode = new EncodeDecode(),
-    createCodec = require('./index').codec,
-    codec = createCodec(encodeDecode, protocol);
+const test = require('ava')
+const OpenApiProtocol = require('open-api-protocol')
+const EncodeDecode = require('connect-js-encode-decode')
+const createAdapter = require('connect-js-adapter-tls')
 
-test.cb('encode and send ping message then recive and decode respond', t => {
-    const
-        payloadType = 52,
-        payload = {timestamp: Date.now()},
-        clientMsgId = 'uuid';
+const { Codec, codec: createCodec } = require('./index')
 
-    protocol.load();
-    protocol.build();
+const connection_config = {
+  host: 'sandbox-tradeapi.spotware.com',
+  port: 5035,
+}
 
-    adapter.onOpen(function () {
-        adapter.send(
-            codec.encode(payloadType, payload, clientMsgId)
-        );
-    });
-    adapter.onData(function (data) {
-        codec.decode(data);
-    });
-    codec.subscribe(function (payloadType, respond, id) {
-        t.is(53, payloadType);
-        t.not(respond.timestamp, undefined);
-        t.is(clientMsgId, id);
-        t.end();
-    });
-    adapter.connect();
-});
+test.cb('encode and send heartbeat message then receive and decode response', t => {  
+  const protocol = new OpenApiProtocol()
+  protocol.load()
+  protocol.build()
+  
+  const encodeDecode = new EncodeDecode()
+  
+  const codec = new Codec(encodeDecode, protocol)
+
+  const adapter = createAdapter(codec)
+  
+  const payloadType = protocol.getPayloadTypeByName('ProtoOAVersionReq')
+  const payload = {}
+  const clientMsgId = 'uuid'
+
+  adapter.onOpen(function () {
+    const message = { payloadType, payload, clientMsgId }
+    adapter.send(message)
+  })
+  
+  codec.subscribe(function (payloadType, response, id) {
+    t.is(payloadType, 2105)
+    t.is(response.version, '60')
+    t.is(id, clientMsgId)
+    t.end()
+  })
+
+  adapter.connect(connection_config)
+})
+
+test.cb('w/ factory function, encode and send heartbeat message then receive and decode response', t => {
+  const protocol = new OpenApiProtocol()
+  protocol.load()
+  protocol.build()
+  
+  const encodeDecode = new EncodeDecode()
+  
+  const codec = createCodec(encodeDecode, protocol)
+  
+  const adapter = createAdapter(codec)
+  
+  const payloadType = protocol.getPayloadTypeByName('ProtoOAVersionReq')
+  const payload = {}
+  const clientMsgId = 'uuid'
+
+  adapter.onOpen(function () {
+    const message = { payloadType, payload, clientMsgId }
+    adapter.send(message)
+  })
+
+  codec.subscribe(function (payloadType, response, id) {
+    t.is(payloadType, 2105)
+    t.is(response.version, '60')
+    t.is(id, clientMsgId)
+    t.end()
+  })
+
+  adapter.connect(connection_config)
+})

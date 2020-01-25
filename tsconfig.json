@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["es5", "es2015", "es2015.symbol", "esnext", "dom"],
+    "strict": true,
+    "noImplicitAny": false,
+    "types": ["node"]
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
